@@ -7,7 +7,6 @@
 
 #include <vector>
 
-
 template<typename T>
 class Vector {
 public:
@@ -24,7 +23,7 @@ public:
     Vector<T>& operator*(const Vector<T>&);
     Vector<T>& operator*(const T&);
     T dot(const Vector<T>&);
-    const bool operator==(const Vector<T>&) const;
+    bool operator==(const Vector<T>&) const;
 
     void print() const;
 private:
@@ -32,4 +31,4 @@ private:
 };
 
 #include "Vector.ipp"
-#endif //VECTOR_H
+#endif VECTOR_H

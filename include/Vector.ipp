@@ -2,6 +2,11 @@
 // Created by Yerdaulet Mussabek on 11.06.2026.
 //
 
+#ifndef VECTOR_IPP
+#define VECTOR_IPP
+
+#include <iostream>
+
 template<typename T>
 Vector<T>::Vector(int size): vector_(size) {}
 
@@ -59,7 +64,7 @@ Vector<T> &Vector<T>::operator*(const T &scalar) {
 }
 
 template<typename T>
-Vector<T> &Vector<T>::dot(const Vector<T> &other) {
+T Vector<T>::dot(const Vector<T> &other) {
     if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
 
     T ret{};
@@ -71,7 +76,7 @@ Vector<T> &Vector<T>::dot(const Vector<T> &other) {
 }
 
 template<typename T>
-const bool Vector<T>::operator==(const Vector<T> &other) const {
+bool Vector<T>::operator==(const Vector<T> &other) const {
     if (other.size() != this->size()) return false;
     for (int i = 0; i < this->size(); i++) {
         if (this[i] != other[i]) return false;
@@ -87,3 +92,5 @@ void Vector<T>::print() const {
     }
     std::cout << std::endl;
 }
+
+#endif VECTOR_IPP
