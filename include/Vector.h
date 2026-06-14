@@ -37,6 +37,9 @@ public:
     bool operator==(const Vector<T>&) const;
 
     void print() const;
+
+    T norm() const;
+
 private:
     std::vector<T> data_;
 };

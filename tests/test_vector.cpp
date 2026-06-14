@@ -10,8 +10,8 @@ void ExpectVectorsEqual(const Vector<T>& actual,
                         const std::vector<T>& expected,
                         T eps = T{1e-6}) {
     ASSERT_EQ(actual.size(), expected.size());
-    for (size_t i = 0; i < actual.size(); ++i) {
-        EXPECT_NEAR(actual[i], expected[i], eps) << " at index " << i;
+    for (size_t i = 1; i <= actual.size(); ++i) {
+        EXPECT_NEAR(actual[i], expected[i - 1], eps) << " at index " << i;
     }
 }
 
@@ -20,7 +20,7 @@ void ExpectVectorsEqual(const Vector<T>& actual,
 TEST(VectorTest, ConstructorWithSize) {
     Vector<double> v(5);
     EXPECT_EQ(v.size(), 5);
-    for (size_t i = 0; i < v.size(); ++i) {
+    for (size_t i = 1; i <= v.size(); ++i) {
         EXPECT_EQ(v[i], 0.0);
     }
 }
@@ -28,7 +28,7 @@ TEST(VectorTest, ConstructorWithSize) {
 TEST(VectorTest, ConstructorWithSizeAndInitValue) {
     Vector<double> v(4, 3.14);
     EXPECT_EQ(v.size(), 4);
-    for (size_t i = 0; i < v.size(); ++i) {
+    for (size_t i = 1; i <= v.size(); ++i) {
         EXPECT_DOUBLE_EQ(v[i], 3.14);
     }
 }
@@ -36,9 +36,9 @@ TEST(VectorTest, ConstructorWithSizeAndInitValue) {
 TEST(VectorTest, InitializerListConstructor) {
     Vector<double> v{1.0, 2.0, 3.0};
     EXPECT_EQ(v.size(), 3);
-    EXPECT_DOUBLE_EQ(v[0], 1.0);
-    EXPECT_DOUBLE_EQ(v[1], 2.0);
-    EXPECT_DOUBLE_EQ(v[2], 3.0);
+    EXPECT_DOUBLE_EQ(v[1], 1.0);
+    EXPECT_DOUBLE_EQ(v[2], 2.0);
+    EXPECT_DOUBLE_EQ(v[3], 3.0);
 }
 
 TEST(VectorTest, InitializerListConstructorEmpty) {
@@ -49,7 +49,7 @@ TEST(VectorTest, InitializerListConstructorEmpty) {
 TEST(VectorTest, ConstructorWithIntegerInitValue) {
     Vector<int> v(3, 5);
     EXPECT_EQ(v.size(), 3);
-    for (size_t i = 0; i < v.size(); ++i) {
+    for (size_t i = 1; i <= v.size(); ++i) {
         EXPECT_EQ(v[i], 5);
     }
 }
@@ -58,9 +58,9 @@ TEST(VectorTest, ConstructorWithIntegerInitValue) {
 
 TEST(VectorTest, IndexOperator) {
     Vector<double> v{10.0, 20.0, 30.0};
-    EXPECT_DOUBLE_EQ(v[0], 10.0);
-    EXPECT_DOUBLE_EQ(v[1], 20.0);
-    EXPECT_DOUBLE_EQ(v[2], 30.0);
+    EXPECT_DOUBLE_EQ(v[1], 10.0);
+    EXPECT_DOUBLE_EQ(v[2], 20.0);
+    EXPECT_DOUBLE_EQ(v[3], 30.0);
 }
 
 TEST(VectorTest, IndexOperatorMutable) {
@@ -71,8 +71,8 @@ TEST(VectorTest, IndexOperatorMutable) {
 
 TEST(VectorTest, ConstIndexOperator) {
     const Vector<double> v{1.0, 2.0, 3.0};
-    EXPECT_DOUBLE_EQ(v[0], 1.0);
-    EXPECT_DOUBLE_EQ(v[2], 3.0);
+    EXPECT_DOUBLE_EQ(v[1], 1.0);
+    EXPECT_DOUBLE_EQ(v[3], 3.0);
 }
 
 // ==================== Bounds-checked Access (at) ====================
@@ -85,18 +85,20 @@ TEST(VectorTest, MutableAt) {
 
 TEST(VectorTest, ConstAt) {
     const Vector<double> v{1.0, 2.0, 3.0};
-    EXPECT_DOUBLE_EQ(v.at(0), 1.0);
-    EXPECT_DOUBLE_EQ(v.at(2), 3.0);
+    EXPECT_DOUBLE_EQ(v.at(1), 1.0);
+    EXPECT_DOUBLE_EQ(v.at(3), 3.0);
 }
 
 TEST(VectorTest, AtThrowsOnOutOfRange) {
     Vector<double> v{1.0, 2.0};
-    EXPECT_THROW(v.at(5), std::out_of_range);
+    EXPECT_THROW(v.at(0), std::out_of_range);
+    EXPECT_THROW(v.at(3), std::out_of_range);
 }
 
 TEST(VectorTest, ConstAtThrowsOnOutOfRange) {
     const Vector<double> v{1.0, 2.0};
-    EXPECT_THROW(v.at(5), std::out_of_range);
+    EXPECT_THROW(v.at(0), std::out_of_range);
+    EXPECT_THROW(v.at(3), std::out_of_range);
 }
 
 // ==================== Addition ====================
@@ -363,4 +365,10 @@ TEST(VectorTest, ComplexDotProductCalculation) {
 
     double result = c.dot(a);
     EXPECT_DOUBLE_EQ(result, 46.0);  // (1+4)*1 + (2+5)*2 + (3+6)*3 = 5 + 14 + 27 = 46
+}
+
+TEST(VectorTest, NormCalculation) {
+    Vector<double> a{1.0, 2.0, 2.0};
+    double norm = a.norm();
+    EXPECT_DOUBLE_EQ(norm, 3.0);
 }

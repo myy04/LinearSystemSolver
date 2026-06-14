@@ -18,5 +18,10 @@ enable_testing()
 add_executable(vector_tests test_vector.cpp)
 target_link_libraries(vector_tests Vector GTest::gtest_main)
 
+# ---- Matrix test executable ----
+add_executable(matrix_tests test_matrix.cpp)
+target_link_libraries(matrix_tests Vector GTest::gtest_main)
+
 include(GoogleTest)
 gtest_discover_tests(vector_tests)
+gtest_discover_tests(matrix_tests)

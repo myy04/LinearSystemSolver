@@ -4,7 +4,7 @@ project(LinearSystemSolver)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(LinearSystemSolver main.cpp
-        src/Matrix.cpp
+        include/Matrix.ipp
         include/Matrix.h
         include/Vector.ipp
         include/Vector.h)
