@@ -42,7 +42,7 @@ private:
 };
 
 template<typename T>
-Vector<T> operator*(double scalar, const Vector<T>& v);
+Vector<T> operator*(const T& scalar, const Vector<T>& v);
 
 #include "Vector.ipp"
 #endif

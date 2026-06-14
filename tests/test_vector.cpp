@@ -75,6 +75,30 @@ TEST(VectorTest, ConstIndexOperator) {
     EXPECT_DOUBLE_EQ(v[2], 3.0);
 }
 
+// ==================== Bounds-checked Access (at) ====================
+
+TEST(VectorTest, MutableAt) {
+    Vector<double> v{1.0, 2.0, 3.0};
+    v.at(1) = 5.0;
+    EXPECT_DOUBLE_EQ(v.at(1), 5.0);
+}
+
+TEST(VectorTest, ConstAt) {
+    const Vector<double> v{1.0, 2.0, 3.0};
+    EXPECT_DOUBLE_EQ(v.at(0), 1.0);
+    EXPECT_DOUBLE_EQ(v.at(2), 3.0);
+}
+
+TEST(VectorTest, AtThrowsOnOutOfRange) {
+    Vector<double> v{1.0, 2.0};
+    EXPECT_THROW(v.at(5), std::out_of_range);
+}
+
+TEST(VectorTest, ConstAtThrowsOnOutOfRange) {
+    const Vector<double> v{1.0, 2.0};
+    EXPECT_THROW(v.at(5), std::out_of_range);
+}
+
 // ==================== Addition ====================
 
 TEST(VectorTest, AdditionNonMutating) {
@@ -200,6 +224,30 @@ TEST(VectorTest, ScalarMultiplicationNegative) {
     ExpectVectorsEqual(result, {-4.0, -6.0, -8.0});
 }
 
+// ==================== Left Scalar Multiplication ====================
+
+TEST(VectorTest, LeftScalarMultiplication) {
+    Vector<double> v{1.0, 2.0, 3.0};
+    Vector<double> result = 2.0 * v;
+
+    ExpectVectorsEqual(result, {2.0, 4.0, 6.0});
+    ExpectVectorsEqual(v, {1.0, 2.0, 3.0});
+}
+
+TEST(VectorTest, LeftScalarMultiplicationByZero) {
+    Vector<double> v{1.0, 2.0, 3.0};
+    Vector<double> result = 0.0 * v;
+
+    ExpectVectorsEqual(result, {0.0, 0.0, 0.0});
+}
+
+TEST(VectorTest, LeftScalarMultiplicationWithIntegers) {
+    Vector<int> v{2, 3, 4};
+    Vector<int> result = 3 * v;
+
+    ExpectVectorsEqual<int>(result, {6, 9, 12}, 0);
+}
+
 // ==================== Dot Product ====================
 
 TEST(VectorTest, DotProduct) {
@@ -272,6 +320,24 @@ TEST(VectorTest, EqualityWithIntegers) {
     Vector<int> b{1, 2, 3};
     
     EXPECT_TRUE(a == b);
+}
+
+// ==================== Print ====================
+
+TEST(VectorTest, Print) {
+    Vector<int> v{1, 2, 3};
+    testing::internal::CaptureStdout();
+    v.print();
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "Vector: 1 2 3 \n");
+}
+
+TEST(VectorTest, PrintEmpty) {
+    Vector<int> v{};
+    testing::internal::CaptureStdout();
+    v.print();
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "Vector: \n");
 }
 
 // ==================== Integration Tests ====================

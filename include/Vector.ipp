@@ -153,10 +153,7 @@ void Vector<T>::print() const {
 
 template<typename T>
 Vector<T> operator*(const T& scalar, const Vector<T>& v) {
-    Vector<T> ret(v);
-    for (size_t i = 0; i < v.size(); i++) {
-        ret *= scalar;
-    }
+    Vector<T> ret = v * scalar;
     return ret;
 }
 
