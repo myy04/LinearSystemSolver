@@ -8,3 +8,6 @@ add_executable(LinearSystemSolver main.cpp
         include/Matrix.h
         include/Vector.ipp
         include/Vector.h)
+
+enable_testing()
+add_subdirectory(tests)

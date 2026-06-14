@@ -6,20 +6,24 @@
 #define VECTOR_IPP
 
 #include <iostream>
+#include <stdexcept>
 
 template<typename T>
-Vector<T>::Vector(int size): vector_(size) {}
+Vector<T>::Vector(size_t size): vector_(size, T{}) {}
+
+template<typename T>
+Vector<T>::Vector(size_t size, T init_val): vector_(size, init_val) {}
 
 template<typename T>
 Vector<T>::Vector(std::initializer_list<T> init): vector_(init) {}
 
 template<typename T>
-T &Vector<T>::operator[](int ind) {
+T &Vector<T>::operator[](size_t ind) {
     return vector_[ind];
 }
 
 template<typename T>
-const T &Vector<T>::operator[](int ind) const {
+const T &Vector<T>::operator[](size_t ind) const {
     return vector_[ind];
 }
 
@@ -29,47 +33,90 @@ size_t Vector<T>::size() const {
 }
 
 template<typename T>
-Vector<T> &Vector<T>::operator+(const Vector<T> &other) {
+Vector<T> &Vector<T>::operator+=(const Vector<T> &other) {
     if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
-    for (int i = 0; i < this->size(); i++) {
-        this[i] += other[i];
+    for (size_t i = 0; i < this->size(); i++) {
+        (*this)[i] += other[i];
     }
-    return this;
+    return *this;
 }
 
 template<typename T>
-Vector<T> &Vector<T>::operator-(const Vector<T> &other) {
+Vector<T> &Vector<T>::operator-=(const Vector<T> &other) {
     if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
-    for (int i = 0; i < this->size(); i++) {
-        this[i] -= other[i];
+    for (size_t i = 0; i < this->size(); i++) {
+        (*this)[i] -= other[i];
     }
-    return this;
+    return *this;
 }
 
 template<typename T>
-Vector<T> &Vector<T>::operator*(const Vector<T> &other) {
+Vector<T> &Vector<T>::operator*=(const Vector<T> &other) {
     if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
-    for (int i = 0; i < this->size(); i++) {
-        this[i] *= other[i];
+    for (size_t i = 0; i < this->size(); i++) {
+        (*this)[i] *= other[i];
     }
-    return this;
+    return *this;
 }
 
 template<typename T>
-Vector<T> &Vector<T>::operator*(const T &scalar) {
-    for (int i = 0; i < this->size(); i++) {
-        this[i] *= scalar;
+Vector<T> &Vector<T>::operator*=(const T &scalar) {
+    for (size_t i = 0; i < this->size(); i++) {
+        (*this)[i] *= scalar;
     }
-    return this;
+    return *this;
 }
+
+template<typename T>
+Vector<T> Vector<T>::operator+(const Vector<T> &other) {
+    if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
+
+    Vector<T> ret(this->size());
+    for (size_t i = 0; i < this->size(); i++) {
+        ret[i] = (*this)[i] + other[i];
+    }
+    return ret;
+}
+
+template<typename T>
+Vector<T> Vector<T>::operator-(const Vector<T> &other) {
+    if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
+
+    Vector<T> ret(this->size());
+    for (size_t i = 0; i < this->size(); i++) {
+        ret[i] = (*this)[i] - other[i];
+    }
+    return ret;
+}
+
+template<typename T>
+Vector<T> Vector<T>::operator*(const Vector<T> &other) {
+    if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
+
+    Vector<T> ret(this->size());
+    for (size_t i = 0; i < this->size(); i++) {
+        ret[i] = (*this)[i] * other[i];
+    }
+    return ret;
+}
+
+template<typename T>
+Vector<T> Vector<T>::operator*(const T &scalar) {
+    Vector<T> ret(this->size());
+    for (size_t i = 0; i < this->size(); i++) {
+        ret[i] = (*this)[i] * scalar;
+    }
+    return ret;
+}
+
 
 template<typename T>
 T Vector<T>::dot(const Vector<T> &other) {
     if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
 
     T ret{};
-    for (int i = 0; i < this->size(); i++) {
-        ret = ret + (this[i] * other[i]);
+    for (size_t i = 0; i < this->size(); i++) {
+        ret = ret + ((*this)[i] * other[i]);
     }
 
     return ret;
@@ -78,8 +125,8 @@ T Vector<T>::dot(const Vector<T> &other) {
 template<typename T>
 bool Vector<T>::operator==(const Vector<T> &other) const {
     if (other.size() != this->size()) return false;
-    for (int i = 0; i < this->size(); i++) {
-        if (this[i] != other[i]) return false;
+    for (size_t i = 0; i < this->size(); i++) {
+        if ((*this)[i] != other[i]) return false;
     }
     return true;
 }
@@ -87,8 +134,8 @@ bool Vector<T>::operator==(const Vector<T> &other) const {
 template<typename T>
 void Vector<T>::print() const {
     std::cout << "Vector: ";
-    for (int i = 0; i < this->size(); i++) {
-        std::cout << this[i] << ' ';
+    for (size_t i = 0; i < this->size(); i++) {
+        std::cout << (*this)[i] << ' ';
     }
     std::cout << std::endl;
 }

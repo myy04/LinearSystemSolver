@@ -10,18 +10,28 @@
 template<typename T>
 class Vector {
 public:
-    explicit Vector(int size);
+    explicit Vector(size_t size);
+    explicit Vector(size_t size, T init_val);
+
     Vector(std::initializer_list<T>);
 
-    T& operator [](int ind);
-    const T& operator[](int ind) const;
+    T& operator [](size_t ind);
+    const T& operator[](size_t ind) const;
 
     [[nodiscard]] size_t size() const;
 
-    Vector<T>& operator+(const Vector<T>&);
-    Vector<T>& operator-(const Vector<T>&);
-    Vector<T>& operator*(const Vector<T>&);
-    Vector<T>& operator*(const T&);
+    Vector<T>& operator+=(const Vector<T>&);
+    Vector<T>& operator-=(const Vector<T>&);
+    Vector<T>& operator*=(const Vector<T>&);
+    Vector<T>& operator*=(const T&);
+
+    Vector<T> operator+(const Vector<T>&);
+    Vector<T> operator-(const Vector<T>&);
+    Vector<T> operator*(const Vector<T>&);
+    Vector<T> operator*(const T&);
+
+
+
     T dot(const Vector<T>&);
     bool operator==(const Vector<T>&) const;
 
