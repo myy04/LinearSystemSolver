@@ -18,6 +18,9 @@ public:
     T& operator [](size_t ind);
     const T& operator[](size_t ind) const;
 
+    T& at(size_t ind);
+    const T& at(size_t ind) const;
+
     [[nodiscard]] size_t size() const;
 
     Vector<T>& operator+=(const Vector<T>&);
@@ -25,20 +28,21 @@ public:
     Vector<T>& operator*=(const Vector<T>&);
     Vector<T>& operator*=(const T&);
 
-    Vector<T> operator+(const Vector<T>&);
-    Vector<T> operator-(const Vector<T>&);
-    Vector<T> operator*(const Vector<T>&);
-    Vector<T> operator*(const T&);
+    Vector<T> operator+(const Vector<T>&) const;
+    Vector<T> operator-(const Vector<T>&) const;
+    Vector<T> operator*(const Vector<T>&) const;
+    Vector<T> operator*(const T&) const;
 
-
-
-    T dot(const Vector<T>&);
+    T dot(const Vector<T>&) const;
     bool operator==(const Vector<T>&) const;
 
     void print() const;
 private:
-    std::vector<T> vector_;
+    std::vector<T> data_;
 };
 
+template<typename T>
+Vector<T> operator*(double scalar, const Vector<T>& v);
+
 #include "Vector.ipp"
-#endif VECTOR_H
+#endif

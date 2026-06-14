@@ -9,31 +9,42 @@
 #include <stdexcept>
 
 template<typename T>
-Vector<T>::Vector(size_t size): vector_(size, T{}) {}
+Vector<T>::Vector(size_t size): data_(size, T{}) {}
 
 template<typename T>
-Vector<T>::Vector(size_t size, T init_val): vector_(size, init_val) {}
+Vector<T>::Vector(size_t size, T init_val): data_(size, init_val) {}
 
 template<typename T>
-Vector<T>::Vector(std::initializer_list<T> init): vector_(init) {}
+Vector<T>::Vector(std::initializer_list<T> init): data_(init) {}
 
 template<typename T>
-T &Vector<T>::operator[](size_t ind) {
-    return vector_[ind];
+T& Vector<T>::operator[](size_t ind) {
+    return data_[ind];
 }
 
 template<typename T>
-const T &Vector<T>::operator[](size_t ind) const {
-    return vector_[ind];
+const T& Vector<T>::operator[](size_t ind) const {
+    return data_[ind];
 }
+
+template<typename T>
+T& Vector<T>::at(size_t ind) {
+    return data_.at(ind);
+}
+
+template<typename T>
+const T& Vector<T>::at(size_t ind) const {
+    return data_.at(ind);
+}
+
 
 template<typename T>
 size_t Vector<T>::size() const {
-    return vector_.size();
+    return data_.size();
 }
 
 template<typename T>
-Vector<T> &Vector<T>::operator+=(const Vector<T> &other) {
+Vector<T>& Vector<T>::operator+=(const Vector<T>& other) {
     if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
     for (size_t i = 0; i < this->size(); i++) {
         (*this)[i] += other[i];
@@ -42,7 +53,7 @@ Vector<T> &Vector<T>::operator+=(const Vector<T> &other) {
 }
 
 template<typename T>
-Vector<T> &Vector<T>::operator-=(const Vector<T> &other) {
+Vector<T>& Vector<T>::operator-=(const Vector<T>& other) {
     if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
     for (size_t i = 0; i < this->size(); i++) {
         (*this)[i] -= other[i];
@@ -51,7 +62,7 @@ Vector<T> &Vector<T>::operator-=(const Vector<T> &other) {
 }
 
 template<typename T>
-Vector<T> &Vector<T>::operator*=(const Vector<T> &other) {
+Vector<T>& Vector<T>::operator*=(const Vector<T>& other) {
     if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
     for (size_t i = 0; i < this->size(); i++) {
         (*this)[i] *= other[i];
@@ -60,7 +71,7 @@ Vector<T> &Vector<T>::operator*=(const Vector<T> &other) {
 }
 
 template<typename T>
-Vector<T> &Vector<T>::operator*=(const T &scalar) {
+Vector<T>& Vector<T>::operator*=(const T& scalar) {
     for (size_t i = 0; i < this->size(); i++) {
         (*this)[i] *= scalar;
     }
@@ -68,7 +79,7 @@ Vector<T> &Vector<T>::operator*=(const T &scalar) {
 }
 
 template<typename T>
-Vector<T> Vector<T>::operator+(const Vector<T> &other) {
+Vector<T> Vector<T>::operator+(const Vector<T>& other) const {
     if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
 
     Vector<T> ret(this->size());
@@ -79,7 +90,7 @@ Vector<T> Vector<T>::operator+(const Vector<T> &other) {
 }
 
 template<typename T>
-Vector<T> Vector<T>::operator-(const Vector<T> &other) {
+Vector<T> Vector<T>::operator-(const Vector<T>& other) const {
     if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
 
     Vector<T> ret(this->size());
@@ -90,7 +101,7 @@ Vector<T> Vector<T>::operator-(const Vector<T> &other) {
 }
 
 template<typename T>
-Vector<T> Vector<T>::operator*(const Vector<T> &other) {
+Vector<T> Vector<T>::operator*(const Vector<T>& other) const {
     if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
 
     Vector<T> ret(this->size());
@@ -101,7 +112,7 @@ Vector<T> Vector<T>::operator*(const Vector<T> &other) {
 }
 
 template<typename T>
-Vector<T> Vector<T>::operator*(const T &scalar) {
+Vector<T> Vector<T>::operator*(const T& scalar) const {
     Vector<T> ret(this->size());
     for (size_t i = 0; i < this->size(); i++) {
         ret[i] = (*this)[i] * scalar;
@@ -111,7 +122,7 @@ Vector<T> Vector<T>::operator*(const T &scalar) {
 
 
 template<typename T>
-T Vector<T>::dot(const Vector<T> &other) {
+T Vector<T>::dot(const Vector<T>& other) const {
     if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
 
     T ret{};
@@ -123,7 +134,7 @@ T Vector<T>::dot(const Vector<T> &other) {
 }
 
 template<typename T>
-bool Vector<T>::operator==(const Vector<T> &other) const {
+bool Vector<T>::operator==(const Vector<T>& other) const {
     if (other.size() != this->size()) return false;
     for (size_t i = 0; i < this->size(); i++) {
         if ((*this)[i] != other[i]) return false;
@@ -140,4 +151,13 @@ void Vector<T>::print() const {
     std::cout << std::endl;
 }
 
-#endif VECTOR_IPP
+template<typename T>
+Vector<T> operator*(const T& scalar, const Vector<T>& v) {
+    Vector<T> ret(v);
+    for (size_t i = 0; i < v.size(); i++) {
+        ret *= scalar;
+    }
+    return ret;
+}
+
+#endif
