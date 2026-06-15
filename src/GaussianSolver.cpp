@@ -27,8 +27,6 @@ namespace {
         }
         return pivot;
     }
-
-    using T = Scalar_t;
 }
 
 template<typename T>

@@ -12,6 +12,19 @@ template<typename T>
 Matrix<T>::Matrix(size_t n, size_t m, T init_val): n_(n), m_(m), data_(n * m, init_val) {}
 
 template<typename T>
+Matrix<T>::Matrix(std::initializer_list<std::initializer_list<T>> init) {
+    n_ = init.size();
+    m_ = (n_ > 0) ? init.begin()->size() : 0;
+    data_.reserve(n_ * m_);
+    for (const auto& row : init) {
+        if (row.size() != m_) throw std::runtime_error("All rows must have the same number of columns");
+        for (const auto& elem : row) {
+            data_.push_back(elem);
+        }
+    }
+}
+
+template<typename T>
 Matrix<T> Matrix<T>::identity(size_t n) {
     Matrix<T> ret(n, n, T{});
     for (size_t i = 1; i <= n; i++) {

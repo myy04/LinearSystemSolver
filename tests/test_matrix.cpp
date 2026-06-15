@@ -39,6 +39,132 @@ TEST(MatrixTest, SizedConstructorDefaultInit) {
     }
 }
 
+// ==================== Initializer List Constructor ====================
+
+TEST(MatrixTest, InitializerList2x2) {
+    Matrix<double> m = {{1.0, 2.0}, {3.0, 4.0}};
+    EXPECT_EQ(m.n(), 2);
+    EXPECT_EQ(m.m(), 2);
+    ExpectElem(m, 1, 1, 1.0);
+    ExpectElem(m, 1, 2, 2.0);
+    ExpectElem(m, 2, 1, 3.0);
+    ExpectElem(m, 2, 2, 4.0);
+}
+
+TEST(MatrixTest, InitializerList3x3) {
+    Matrix<double> m = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+    EXPECT_EQ(m.n(), 3);
+    EXPECT_EQ(m.m(), 3);
+    ExpectElem(m, 1, 1, 1.0);
+    ExpectElem(m, 1, 3, 3.0);
+    ExpectElem(m, 2, 2, 5.0);
+    ExpectElem(m, 3, 1, 7.0);
+    ExpectElem(m, 3, 3, 9.0);
+}
+
+TEST(MatrixTest, InitializerListNonSquare) {
+    Matrix<double> m = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}};
+    EXPECT_EQ(m.n(), 2);
+    EXPECT_EQ(m.m(), 3);
+    ExpectElem(m, 1, 1, 1.0);
+    ExpectElem(m, 1, 3, 3.0);
+    ExpectElem(m, 2, 1, 4.0);
+    ExpectElem(m, 2, 3, 6.0);
+}
+
+TEST(MatrixTest, InitializerListSingleRow) {
+    Matrix<double> m = {{1.0, 2.0, 3.0, 4.0}};
+    EXPECT_EQ(m.n(), 1);
+    EXPECT_EQ(m.m(), 4);
+    ExpectElem(m, 1, 1, 1.0);
+    ExpectElem(m, 1, 2, 2.0);
+    ExpectElem(m, 1, 3, 3.0);
+    ExpectElem(m, 1, 4, 4.0);
+}
+
+TEST(MatrixTest, InitializerListSingleColumn) {
+    Matrix<double> m = {{1.0}, {2.0}, {3.0}};
+    EXPECT_EQ(m.n(), 3);
+    EXPECT_EQ(m.m(), 1);
+    ExpectElem(m, 1, 1, 1.0);
+    ExpectElem(m, 2, 1, 2.0);
+    ExpectElem(m, 3, 1, 3.0);
+}
+
+TEST(MatrixTest, InitializerListWithIntegers) {
+    Matrix<int> m = {{1, 2, 3}, {4, 5, 6}};
+    EXPECT_EQ(m.n(), 2);
+    EXPECT_EQ(m.m(), 3);
+    int val11 = m[1, 1];
+    int val13 = m[1, 3];
+    int val22 = m[2, 2];
+    EXPECT_EQ(val11, 1);
+    EXPECT_EQ(val13, 3);
+    EXPECT_EQ(val22, 5);
+}
+
+TEST(MatrixTest, InitializerListWithFloats) {
+    Matrix<float> m = {{1.5f, 2.5f}, {3.5f, 4.5f}};
+    EXPECT_EQ(m.n(), 2);
+    EXPECT_EQ(m.m(), 2);
+    float val11 = m[1, 1];
+    float val22 = m[2, 2];
+    EXPECT_FLOAT_EQ(val11, 1.5f);
+    EXPECT_FLOAT_EQ(val22, 4.5f);
+}
+
+TEST(MatrixTest, InitializerListWithNegativeValues) {
+    Matrix<double> m = {{-1.0, -2.0}, {3.0, -4.0}};
+    EXPECT_EQ(m.n(), 2);
+    EXPECT_EQ(m.m(), 2);
+    ExpectElem(m, 1, 1, -1.0);
+    ExpectElem(m, 1, 2, -2.0);
+    ExpectElem(m, 2, 1, 3.0);
+    ExpectElem(m, 2, 2, -4.0);
+}
+
+TEST(MatrixTest, InitializerListWithZeros) {
+    Matrix<double> m = {{0.0, 0.0}, {0.0, 0.0}};
+    EXPECT_EQ(m.n(), 2);
+    EXPECT_EQ(m.m(), 2);
+    for (size_t i = 1; i <= 2; i++) {
+        for (size_t j = 1; j <= 2; j++) {
+            ExpectElem(m, i, j, 0.0);
+        }
+    }
+}
+
+TEST(MatrixTest, InitializerListIdentity) {
+    Matrix<double> m = {{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
+    EXPECT_EQ(m.n(), 3);
+    EXPECT_EQ(m.m(), 3);
+    for (size_t i = 1; i <= 3; i++) {
+        for (size_t j = 1; j <= 3; j++) {
+            if (i == j) {
+                ExpectElem(m, i, j, 1.0);
+            } else {
+                ExpectElem(m, i, j, 0.0);
+            }
+        }
+    }
+}
+
+TEST(MatrixTest, InitializerListLarge) {
+    Matrix<int> m = {{1, 2, 3, 4, 5},
+                     {6, 7, 8, 9, 10},
+                     {11, 12, 13, 14, 15}};
+    EXPECT_EQ(m.n(), 3);
+    EXPECT_EQ(m.m(), 5);
+    int val11 = m[1, 1];
+    int val15 = m[1, 5];
+    int val21 = m[2, 1];
+    int val35 = m[3, 5];
+    EXPECT_EQ(val11, 1);
+    EXPECT_EQ(val15, 5);
+    EXPECT_EQ(val21, 6);
+    EXPECT_EQ(val35, 15);
+}
+
 // ==================== Identity ====================
 
 TEST(MatrixTest, IdentitySize) {

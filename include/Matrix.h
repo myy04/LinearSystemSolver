@@ -13,12 +13,13 @@ class Matrix {
 public:
     Matrix() = default;
     explicit Matrix(size_t n, size_t m, T init_val);
+    Matrix(std::initializer_list<std::initializer_list<T>> init);
 
     static Matrix identity(size_t n);
     static Matrix hilbert(size_t n);
 
-    size_t n() const;
-    size_t m() const;
+    [[nodiscard]] size_t n() const;
+    [[nodiscard]] size_t m() const;
 
     T& operator[](size_t i, size_t j);
     const T& operator[](size_t i, size_t j) const;
