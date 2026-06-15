@@ -6,6 +6,7 @@
 #define VECTOR_H
 
 #include <vector>
+#include "Traits.h"
 
 template<typename T>
 class Vector {
@@ -41,6 +42,8 @@ public:
     T norm() const;
 
 private:
+    using AccType = typename Accumulator<T>::Type;
+
     std::vector<T> data_;
 };
 

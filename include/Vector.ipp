@@ -130,7 +130,7 @@ template<typename T>
 T Vector<T>::dot(const Vector<T>& other) const {
     if (other.size() != this->size()) throw std::runtime_error("Size Mismatch");
 
-    T ret{};
+    AccType ret{};
     for (size_t i = 1; i <= this->size(); i++) {
         ret = ret + ((*this)[i] * other[i]);
     }
@@ -164,7 +164,7 @@ Vector<T> operator*(const T& scalar, const Vector<T>& v) {
 
 template<typename T>
 T Vector<T>::norm() const {
-    T ret{};
+    AccType ret{};
     for (size_t i = 1; i <= this->size(); i++) {
         ret += ((*this)[i] * (*this)[i]);
     }
