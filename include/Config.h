@@ -5,6 +5,6 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-using Scalar = double;
+using Scalar_t = double;
 
 #endif //CONFIG_H

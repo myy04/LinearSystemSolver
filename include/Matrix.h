@@ -31,6 +31,8 @@ public:
 
     void swap_rows(size_t r1, size_t r2);
 
+    void print() const;
+
     Vector<T> operator*(const Vector<T>& v) const;
 private:
     size_t n_ = 0;

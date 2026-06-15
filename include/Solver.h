@@ -7,13 +7,14 @@
 
 #include "Matrix.h"
 #include "Vector.h"
+#include "Traits.h"
 
 template<typename T>
 struct SolverResult {
-    Vector<T>   x;
-    bool        converged = true;
-    int         iterations = 0;
-    T           residual = 0.0;
+    Vector<T>       x;
+    bool            converged = true;
+    int             iterations = 0;
+    Accumulator_t<T>  residual = 0.0;
 };
 
 template<typename T>

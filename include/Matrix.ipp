@@ -6,6 +6,7 @@
 #define MATRIX_IPP
 
 #include <algorithm>
+#include <iostream>
 
 template<typename T>
 Matrix<T>::Matrix(size_t n, size_t m, T init_val): n_(n), m_(m), data_(n * m, init_val) {}
@@ -104,6 +105,27 @@ Vector<T> Matrix<T>::operator*(const Vector<T> &v) const {
         ret[i] = row.dot(v);
     }
     return ret;
+}
+
+template<typename T>
+void Matrix<T>::print() const {
+    for (int i = 1; i <= this->m() + 2; i++) {
+        std::cout << '-';
+    }
+    std::cout << std::endl;
+
+    for (int i = 1; i <= this->n(); i++) {
+        for (int j = 1; j <= this->m(); j++) {
+            std::cout << (*this)[i, j] << ' ';
+        }
+        std::cout << std::endl;
+    }
+
+    for (int i = 1; i <= this->m() + 2; i++) {
+        std::cout << '-';
+    }
+
+    std::cout << std::endl;
 }
 
 

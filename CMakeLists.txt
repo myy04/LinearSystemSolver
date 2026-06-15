@@ -9,9 +9,10 @@ add_executable(LinearSystemSolver main.cpp
         include/Vector.ipp
         include/Vector.h
         include/Solver.h
-        src/Solver.cpp
         include/Traits.h
-        include/Config.h)
+        include/Config.h
+        src/GaussianSolver.cpp
+        include/GaussianSolver.h)
 
 enable_testing()
 add_subdirectory(tests)

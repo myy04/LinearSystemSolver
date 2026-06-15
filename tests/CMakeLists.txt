@@ -22,6 +22,11 @@ target_link_libraries(vector_tests Vector GTest::gtest_main)
 add_executable(matrix_tests test_matrix.cpp)
 target_link_libraries(matrix_tests Vector GTest::gtest_main)
 
+# ---- GaussianSolver test executable ----
+add_executable(gaussian_solver_tests test_gaussian_solver.cpp ../src/GaussianSolver.cpp)
+target_link_libraries(gaussian_solver_tests Vector GTest::gtest_main)
+
 include(GoogleTest)
 gtest_discover_tests(vector_tests)
 gtest_discover_tests(matrix_tests)
+gtest_discover_tests(gaussian_solver_tests)

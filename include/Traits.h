@@ -7,12 +7,15 @@
 
 template<typename T>
 struct Accumulator {
-    using Type = T;
+    using type = T;
 };
 
 template<>
 struct Accumulator<float> {
-    using Type = double;
+    using type = double;
 };
+
+template<typename T>
+using Accumulator_t = typename Accumulator<T>::type;
 
 #endif //TRAITS_H

@@ -42,8 +42,6 @@ public:
     T norm() const;
 
 private:
-    using AccType = typename Accumulator<T>::Type;
-
     std::vector<T> data_;
 };
 
