@@ -35,6 +35,10 @@ public:
     void print() const;
 
     Vector<T> operator*(const Vector<T>& v) const;
+
+    const std::vector<T> &data() const { return data_; }
+    const T* data_ptr() const { return data_.data(); }
+
 private:
     size_t n_ = 0;
     size_t m_ = 0;

@@ -172,4 +172,5 @@ T Vector<T>::norm() const {
     return ret;
 }
 
+
 #endif
