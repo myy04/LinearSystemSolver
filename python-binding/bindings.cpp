@@ -53,7 +53,7 @@ py::array_t<double> GaussianSolver_wrapper(const py::array_t<double>& A, const p
     return result;
 }
 
-PYBIND11_MODULE(bindings, m) {
+PYBIND11_MODULE(LinearSystemSolver, m) {
     m.doc() = "Python bindings for the C++ library";
 
     // Bind the wrapper function that python tests are trying to use
