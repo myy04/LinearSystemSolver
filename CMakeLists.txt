@@ -22,7 +22,7 @@ find_package(pybind11 REQUIRED)
 
 # Compile bindings.cpp as a Python module using a distinct target name
 pybind11_add_module(LinearSystemSolver_py
-        python-binding/bindings.cpp
+        src/bindings.cpp
         src/GaussianSolver.cpp
 )
 
@@ -30,5 +30,5 @@ pybind11_add_module(LinearSystemSolver_py
 # and set the directory to the tests folder
 set_target_properties(LinearSystemSolver_py PROPERTIES
         OUTPUT_NAME "LinearSystemSolver"
-        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/tests
+        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/python
 )
