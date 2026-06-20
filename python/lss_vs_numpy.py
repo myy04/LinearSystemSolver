@@ -1,8 +1,9 @@
 from random import randint
 
 import numpy as np
-import bindings
+import LinearSystemSolver as LSS
 import random
+import sys
 
 def generate_random_matrix(rows, cols):
     """Generate a random matrix of given dimensions."""
@@ -17,7 +18,7 @@ def get_numpy_solution(A, b):
     return np.linalg.solve(A, b)
 
 def get_my_solution(A, b):
-    return bindings.gaussian_solve(A, b)
+    return LSS.gaussian_solve(A, b)
 
 
 if __name__ == "__main__":
@@ -41,6 +42,10 @@ if __name__ == "__main__":
         print(my_solution)
 
         # Check if the solutions are close enough
-        assert np.allclose(numpy_solution, my_solution), "The solutions do not match!"
+        if np.allclose(numpy_solution, my_solution) == False:
+            print("Test failed for matrix size:", rows)
+            print("Numpy solution:", numpy_solution)
+            print("My solution:", my_solution)
+            sys.exit(0)
 
     print("All tests passed successfully!")

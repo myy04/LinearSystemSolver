@@ -43,6 +43,7 @@ private:
     size_t n_ = 0;
     size_t m_ = 0;
     std::vector<T> data_;
+    std::vector<size_t> row_order_;
 };
 
 #include "Matrix.ipp"

@@ -9,18 +9,24 @@
 #include <iostream>
 
 template<typename T>
-Matrix<T>::Matrix(size_t n, size_t m, T init_val): n_(n), m_(m), data_(n * m, init_val) {}
+Matrix<T>::Matrix(size_t n, size_t m, T init_val): n_(n), m_(m), data_(n * m, init_val), row_order_(n) {
+    for (int i = 0; i < n_; i++) {
+        row_order_[i] = i;
+    }
+}
 
 template<typename T>
-Matrix<T>::Matrix(std::initializer_list<std::initializer_list<T>> init) {
-    n_ = init.size();
-    m_ = (n_ > 0) ? init.begin()->size() : 0;
+Matrix<T>::Matrix(std::initializer_list<std::initializer_list<T>> init): n_(init.size()), m_((n_ > 0) ? init.begin()->size() : 0), row_order_(init.size()) {
     data_.reserve(n_ * m_);
     for (const auto& row : init) {
         if (row.size() != m_) throw std::runtime_error("All rows must have the same number of columns");
         for (const auto& elem : row) {
             data_.push_back(elem);
         }
+    }
+
+    for (int i = 0; i < n_; i++) {
+        row_order_[i] = i;
     }
 }
 
@@ -54,6 +60,8 @@ template<typename T>
 T& Matrix<T>::operator[](size_t i, size_t j) {
     i--;
     j--;
+
+    i = row_order_[i];
     return data_[i * this->m() + j];
 }
 
@@ -61,6 +69,8 @@ template<typename T>
 const T& Matrix<T>::operator[](size_t i, size_t j) const {
     i--;
     j--;
+
+    i = row_order_[i];
     return data_[i * this->m() + j];
 }
 
@@ -71,6 +81,8 @@ T& Matrix<T>::at(size_t i, size_t j) {
     }
     i--;
     j--;
+
+    i = row_order_[i];
     return data_[i * this->m() + j];
 }
 
@@ -81,6 +93,8 @@ const T& Matrix<T>::at(size_t i, size_t j) const {
     }
     i--;
     j--;
+
+    i = row_order_[i];
     return data_[i * this->m() + j];
 }
 
@@ -104,9 +118,7 @@ Vector<T> Matrix<T>::col(size_t j) const {
 
 template<typename T>
 void Matrix<T>::swap_rows(size_t r1, size_t r2) {
-    for (size_t j = 1; j <= this->m(); j++) {
-        std::swap((*this)[r1, j], (*this)[r2, j]);
-    }
+    std::swap(row_order_[r1 - 1], row_order_[r2 - 1]);
 }
 
 template<typename T>
