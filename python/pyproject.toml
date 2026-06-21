@@ -1,3 +1,3 @@
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts   = "--benchmark-storage=.benchmarks --benchmark-warmup=on --benchmark-disable-gc"
+addopts   = "--benchmark-storage=.benchmarks --benchmark-warmup=off --benchmark-disable-gc --benchmark-autosave"
