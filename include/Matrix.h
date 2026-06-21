@@ -21,8 +21,8 @@ public:
     [[nodiscard]] size_t n() const;
     [[nodiscard]] size_t m() const;
 
-    T& operator[](size_t i, size_t j);
-    const T& operator[](size_t i, size_t j) const;
+    __attribute__((always_inline)) inline T& operator[](const size_t i, const size_t j);
+    __attribute__((always_inline)) inline const T& operator[](const size_t i, const size_t j) const;
 
     T& at(size_t i, size_t j);
     const T& at(size_t i, size_t j) const;
@@ -36,6 +36,7 @@ public:
 
     Vector<T> operator*(const Vector<T>& v) const;
 
+    std::vector<T> &data() {return data_;}
     const std::vector<T> &data() const { return data_; }
     const T* data_ptr() const { return data_.data(); }
 

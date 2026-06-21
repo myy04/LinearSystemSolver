@@ -41,6 +41,7 @@ public:
 
     T norm() const;
 
+    std::vector<T>& data() {return data_;}
     const std::vector<T>& data() const {return data_;}
     const T* data_ptr() const { return data_.data();}
 

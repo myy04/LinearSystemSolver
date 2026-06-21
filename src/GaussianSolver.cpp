@@ -2,6 +2,8 @@
 // Created by Yerdaulet Mussabek on 15.06.2026.
 //
 
+#pragma GCC optimize("O3")
+
 #include "../include/GaussianSolver.h"
 
 #include "../include/Matrix.h"
@@ -30,17 +32,28 @@ namespace {
 }
 
 template<typename T>
-Vector<T> GaussianSolver<T>::solve(const Matrix<T> &A, const Vector<T> &b) {
+Vector<T> GaussianSolver<T>::solve(const Matrix<T>& A, const Vector<T>& b) {
     if (b.size() != A.n()) throw std::runtime_error("Size Mismatch");
 
-    // Build a new matrix where the m+1'th columns is vector b
     Matrix<T> Ab(A.n(), A.m() + 1, 0);
-    for (size_t i = 1; i <= A.n(); i++) {
-        for (size_t j = 1; j <= A.m(); j++) {
-            Ab[i, j] = A[i, j];
+    
+    auto Ab_iter = Ab.data().begin();
+    auto A_iter = A.data().begin(); 
+    auto b_iter = b.data().begin();
+
+    for (size_t i = 0; i < Ab.n() * Ab.m(); i++) {
+        if ((i + 1) % Ab.m() == 0) [[unlikely]] {
+            *Ab_iter = *b_iter;
+            b_iter++;
+        } 
+        else { 
+            *Ab_iter = *A_iter;
+            A_iter++;
         }
-        Ab[i, A.m() + 1] = b[i];
+
+        Ab_iter++; 
     }
+
 
     for (size_t i = 1; i < Ab.n(); i++) {
         size_t pivot = find_partial_pivot(Ab, i);

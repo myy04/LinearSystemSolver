@@ -57,21 +57,13 @@ template<typename T>
 size_t Matrix<T>::m() const {return m_;}
 
 template<typename T>
-T& Matrix<T>::operator[](size_t i, size_t j) {
-    i--;
-    j--;
-
-    i = row_order_[i];
-    return data_[i * this->m() + j];
+T& Matrix<T>::operator[](const size_t i, const size_t j) {
+    return data_[row_order_[i - 1] * this->m() + j - 1];
 }
 
 template<typename T>
-const T& Matrix<T>::operator[](size_t i, size_t j) const {
-    i--;
-    j--;
-
-    i = row_order_[i];
-    return data_[i * this->m() + j];
+const T& Matrix<T>::operator[](const size_t i, const size_t j) const {
+    return data_[row_order_[i - 1] * this->m() + j - 1];
 }
 
 template<typename T>
@@ -79,11 +71,8 @@ T& Matrix<T>::at(size_t i, size_t j) {
     if (i < 1 || i > n_ || j < 1 || j > m_) {
         throw std::out_of_range("Matrix index out of range");
     }
-    i--;
-    j--;
 
-    i = row_order_[i];
-    return data_[i * this->m() + j];
+    return data_[row_order_[i - 1] * this->m() + j - 1];
 }
 
 template<typename T>
@@ -91,11 +80,8 @@ const T& Matrix<T>::at(size_t i, size_t j) const {
     if (i < 1 || i > n_ || j < 1 || j > m_) {
         throw std::out_of_range("Matrix index out of range");
     }
-    i--;
-    j--;
 
-    i = row_order_[i];
-    return data_[i * this->m() + j];
+    return data_[row_order_[i - 1] * this->m() + j - 1];
 }
 
 template<typename T>
