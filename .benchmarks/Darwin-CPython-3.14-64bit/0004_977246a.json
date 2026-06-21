@@ -1,0 +1,487 @@
+{
+    "machine_info": {
+        "node": "Yerdaulets-MacBook-Pro.local",
+        "processor": "arm",
+        "machine": "arm64",
+        "python_compiler": "Clang 17.0.0 (clang-1700.0.13.3)",
+        "python_implementation": "CPython",
+        "python_implementation_version": "3.14.0",
+        "python_version": "3.14.0",
+        "python_build": [
+            "main",
+            "Oct  7 2025 09:34:52"
+        ],
+        "release": "25.5.0",
+        "system": "Darwin",
+        "cpu": {
+            "python_version": "3.14.0.final.0 (64 bit)",
+            "cpuinfo_version": [
+                9,
+                0,
+                0
+            ],
+            "cpuinfo_version_string": "9.0.0",
+            "arch": "ARM_8",
+            "bits": 64,
+            "count": 10,
+            "arch_string_raw": "arm64",
+            "brand_raw": "Apple M4"
+        }
+    },
+    "commit_info": {
+        "id": "977246a467368358d565063cde624aba7cfe4f50",
+        "time": "2026-06-21T16:41:13+05:00",
+        "author_time": "2026-06-21T16:41:13+05:00",
+        "dirty": false,
+        "project": "LinearSystemSolver",
+        "branch": "gauss-speedup"
+    },
+    "benchmarks": [
+        {
+            "group": null,
+            "name": "test_lss_solver[n=10]",
+            "fullname": "lss_benchmark.py::test_lss_solver[n=10]",
+            "params": {
+                "n": 10
+            },
+            "param": "n=10",
+            "extra_info": {},
+            "options": {
+                "disable_gc": true,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 100000
+            },
+            "stats": {
+                "min": 1.3541954103857279e-05,
+                "max": 0.0001105000264942646,
+                "mean": 1.4536044478172752e-05,
+                "stddev": 1.6795686087845518e-06,
+                "rounds": 73622,
+                "median": 1.4040968380868435e-05,
+                "iqr": 1.2080417945981026e-06,
+                "q1": 1.391698606312275e-05,
+                "q3": 1.5125027857720852e-05,
+                "iqr_outliers": 2482,
+                "stddev_outliers": 2746,
+                "outliers": "2746;2482",
+                "ld15iqr": 1.3541954103857279e-05,
+                "hd15iqr": 1.695798709988594e-05,
+                "ops": 68794.50606398424,
+                "total": 1.0701726665720344,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_lss_solver[n=50]",
+            "fullname": "lss_benchmark.py::test_lss_solver[n=50]",
+            "params": {
+                "n": 50
+            },
+            "param": "n=50",
+            "extra_info": {},
+            "options": {
+                "disable_gc": true,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 100000
+            },
+            "stats": {
+                "min": 0.000600875006057322,
+                "max": 0.0009175420273095369,
+                "mean": 0.0006519586376480919,
+                "stddev": 2.7850990157547543e-05,
+                "rounds": 1664,
+                "median": 0.0006528544763568789,
+                "iqr": 2.064500586129725e-05,
+                "q1": 0.0006406460015568882,
+                "q3": 0.0006612910074181855,
+                "iqr_outliers": 165,
+                "stddev_outliers": 337,
+                "outliers": "337;165",
+                "ld15iqr": 0.0006097090081311762,
+                "hd15iqr": 0.0006937079597264528,
+                "ops": 1533.83963683256,
+                "total": 1.084859173046425,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_lss_solver[n=100]",
+            "fullname": "lss_benchmark.py::test_lss_solver[n=100]",
+            "params": {
+                "n": 100
+            },
+            "param": "n=100",
+            "extra_info": {},
+            "options": {
+                "disable_gc": true,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 100000
+            },
+            "stats": {
+                "min": 0.004493208019994199,
+                "max": 0.005456416984088719,
+                "mean": 0.00474955419374989,
+                "stddev": 0.0001272277724387898,
+                "rounds": 223,
+                "median": 0.004771749954670668,
+                "iqr": 0.00018228149565402418,
+                "q1": 0.004645822758902796,
+                "q3": 0.00482810425455682,
+                "iqr_outliers": 2,
+                "stddev_outliers": 64,
+                "outliers": "64;2",
+                "ld15iqr": 0.004493208019994199,
+                "hd15iqr": 0.0054145409958437085,
+                "ops": 210.5460763698488,
+                "total": 1.0591505852062255,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_lss_solver[n=250]",
+            "fullname": "lss_benchmark.py::test_lss_solver[n=250]",
+            "params": {
+                "n": 250
+            },
+            "param": "n=250",
+            "extra_info": {},
+            "options": {
+                "disable_gc": true,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 100000
+            },
+            "stats": {
+                "min": 0.07092162495246157,
+                "max": 0.08270183397689834,
+                "mean": 0.07258749713267511,
+                "stddev": 0.0028579181724338407,
+                "rounds": 15,
+                "median": 0.07183562498539686,
+                "iqr": 0.00109287524537649,
+                "q1": 0.07135599976754747,
+                "q3": 0.07244887501292396,
+                "iqr_outliers": 1,
+                "stddev_outliers": 1,
+                "outliers": "1;1",
+                "ld15iqr": 0.07092162495246157,
+                "hd15iqr": 0.08270183397689834,
+                "ops": 13.776477210286014,
+                "total": 1.0888124569901265,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_lss_solver[n=500]",
+            "fullname": "lss_benchmark.py::test_lss_solver[n=500]",
+            "params": {
+                "n": 500
+            },
+            "param": "n=500",
+            "extra_info": {},
+            "options": {
+                "disable_gc": true,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 100000
+            },
+            "stats": {
+                "min": 0.5681923340307549,
+                "max": 0.5758379580220208,
+                "mean": 0.5711092000012286,
+                "stddev": 0.0036819768104594435,
+                "rounds": 5,
+                "median": 0.5687739580171183,
+                "iqr": 0.0063823434902587906,
+                "q1": 0.568340770987561,
+                "q3": 0.5747231144778198,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 0.5681923340307549,
+                "hd15iqr": 0.5758379580220208,
+                "ops": 1.750978621948042,
+                "total": 2.855546000006143,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_lss_solver[n=1000]",
+            "fullname": "lss_benchmark.py::test_lss_solver[n=1000]",
+            "params": {
+                "n": 1000
+            },
+            "param": "n=1000",
+            "extra_info": {},
+            "options": {
+                "disable_gc": true,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 100000
+            },
+            "stats": {
+                "min": 4.525928125018254,
+                "max": 4.610694292001426,
+                "mean": 4.545349508407526,
+                "stddev": 0.03660986503885012,
+                "rounds": 5,
+                "median": 4.5297266250126995,
+                "iqr": 0.02468735472939443,
+                "q1": 4.527383562264731,
+                "q3": 4.552070916994126,
+                "iqr_outliers": 1,
+                "stddev_outliers": 1,
+                "outliers": "1;1",
+                "ld15iqr": 4.525928125018254,
+                "hd15iqr": 4.610694292001426,
+                "ops": 0.22000508391055554,
+                "total": 22.72674754203763,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_numpy_solver[n=10]",
+            "fullname": "lss_benchmark.py::test_numpy_solver[n=10]",
+            "params": {
+                "n": 10
+            },
+            "param": "n=10",
+            "extra_info": {},
+            "options": {
+                "disable_gc": true,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 100000
+            },
+            "stats": {
+                "min": 2.3083004634827377e-06,
+                "max": 6.266596028581262e-06,
+                "mean": 2.5765126625590047e-06,
+                "stddev": 1.1360564216357096e-07,
+                "rounds": 42031,
+                "median": 2.5583023671060802e-06,
+                "iqr": 5.00003807246685e-08,
+                "q1": 2.537498949095607e-06,
+                "q3": 2.5874993298202754e-06,
+                "iqr_outliers": 1188,
+                "stddev_outliers": 1131,
+                "outliers": "1131;1188",
+                "ld15iqr": 2.466695150360465e-06,
+                "hd15iqr": 2.6665977202355863e-06,
+                "ops": 388121.5157727171,
+                "total": 0.10829340372001753,
+                "iterations": 10
+            }
+        },
+        {
+            "group": null,
+            "name": "test_numpy_solver[n=50]",
+            "fullname": "lss_benchmark.py::test_numpy_solver[n=50]",
+            "params": {
+                "n": 50
+            },
+            "param": "n=50",
+            "extra_info": {},
+            "options": {
+                "disable_gc": true,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 100000
+            },
+            "stats": {
+                "min": 1.1249969247728586e-05,
+                "max": 5.9999991208314896e-05,
+                "mean": 1.2790015878870267e-05,
+                "stddev": 7.597384289850709e-07,
+                "rounds": 91250,
+                "median": 1.291598891839385e-05,
+                "iqr": 6.67001586407423e-07,
+                "q1": 1.2375006917864084e-05,
+                "q3": 1.3042008504271507e-05,
+                "iqr_outliers": 876,
+                "stddev_outliers": 3579,
+                "outliers": "3579;876",
+                "ld15iqr": 1.1374999303370714e-05,
+                "hd15iqr": 1.4082994312047958e-05,
+                "ops": 78185.98580882522,
+                "total": 1.1670889489469118,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_numpy_solver[n=100]",
+            "fullname": "lss_benchmark.py::test_numpy_solver[n=100]",
+            "params": {
+                "n": 100
+            },
+            "param": "n=100",
+            "extra_info": {},
+            "options": {
+                "disable_gc": true,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 100000
+            },
+            "stats": {
+                "min": 3.1584000680595636e-05,
+                "max": 0.0005749999545514584,
+                "mean": 3.7326457775997645e-05,
+                "stddev": 5.4800474045050515e-06,
+                "rounds": 31705,
+                "median": 3.6959012504667044e-05,
+                "iqr": 1.5409896150231361e-06,
+                "q1": 3.62499849870801e-05,
+                "q3": 3.779097460210323e-05,
+                "iqr_outliers": 1338,
+                "stddev_outliers": 673,
+                "outliers": "673;1338",
+                "ld15iqr": 3.3958000130951405e-05,
+                "hd15iqr": 4.016701132059097e-05,
+                "ops": 26790.64823137433,
+                "total": 1.1834353437880054,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_numpy_solver[n=250]",
+            "fullname": "lss_benchmark.py::test_numpy_solver[n=250]",
+            "params": {
+                "n": 250
+            },
+            "param": "n=250",
+            "extra_info": {},
+            "options": {
+                "disable_gc": true,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 100000
+            },
+            "stats": {
+                "min": 0.00017437495989724994,
+                "max": 0.00026241695741191506,
+                "mean": 0.00019414908797495706,
+                "stddev": 5.66537727594248e-06,
+                "rounds": 5693,
+                "median": 0.0001949169673025608,
+                "iqr": 8.416012860834599e-06,
+                "q1": 0.00018966698553413153,
+                "q3": 0.00019808299839496613,
+                "iqr_outliers": 63,
+                "stddev_outliers": 1571,
+                "outliers": "1571;63",
+                "ld15iqr": 0.0001770830131135881,
+                "hd15iqr": 0.0002116659888997674,
+                "ops": 5150.680904197645,
+                "total": 1.1052907578414306,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_numpy_solver[n=500]",
+            "fullname": "lss_benchmark.py::test_numpy_solver[n=500]",
+            "params": {
+                "n": 500
+            },
+            "param": "n=500",
+            "extra_info": {},
+            "options": {
+                "disable_gc": true,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 100000
+            },
+            "stats": {
+                "min": 0.0008755000308156013,
+                "max": 0.0009637079783715308,
+                "mean": 0.0009145131270500147,
+                "stddev": 9.399224592494387e-06,
+                "rounds": 1261,
+                "median": 0.0009143750066868961,
+                "iqr": 1.0249976185150445e-05,
+                "q1": 0.0009088339866138995,
+                "q3": 0.0009190839627990499,
+                "iqr_outliers": 75,
+                "stddev_outliers": 291,
+                "outliers": "291;75",
+                "ld15iqr": 0.0008937920210883021,
+                "hd15iqr": 0.0009346660226583481,
+                "ops": 1093.4780162486504,
+                "total": 1.1532010532100685,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_numpy_solver[n=1000]",
+            "fullname": "lss_benchmark.py::test_numpy_solver[n=1000]",
+            "params": {
+                "n": 1000
+            },
+            "param": "n=1000",
+            "extra_info": {},
+            "options": {
+                "disable_gc": true,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": 100000
+            },
+            "stats": {
+                "min": 0.0037036669673398137,
+                "max": 0.0038519580266438425,
+                "mean": 0.00379011147912715,
+                "stddev": 2.1869466911290556e-05,
+                "rounds": 287,
+                "median": 0.003789125010371208,
+                "iqr": 2.6969239115715027e-05,
+                "q1": 0.003776499754167162,
+                "q3": 0.003803468993282877,
+                "iqr_outliers": 4,
+                "stddev_outliers": 87,
+                "outliers": "87;4",
+                "ld15iqr": 0.0037446669884957373,
+                "hd15iqr": 0.0038450840511359274,
+                "ops": 263.8444820177945,
+                "total": 1.087761994509492,
+                "iterations": 1
+            }
+        }
+    ],
+    "datetime": "2026-06-21T11:44:31.632764+00:00",
+    "version": "5.2.3"
+}
