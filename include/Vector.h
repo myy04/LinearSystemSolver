@@ -16,8 +16,8 @@ public:
 
     Vector(std::initializer_list<T>);
 
-    T& operator [](size_t ind);
-    const T& operator[](size_t ind) const;
+    __attribute__((always_inline)) T& operator [](const size_t ind);
+    __attribute__((always_inline)) const T& operator[](const size_t ind) const;
 
     T& at(size_t ind);
     const T& at(size_t ind) const;

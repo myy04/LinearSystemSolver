@@ -19,27 +19,23 @@ template<typename T>
 Vector<T>::Vector(std::initializer_list<T> init): data_(init) {}
 
 template<typename T>
-T& Vector<T>::operator[](size_t ind) {
-    ind--;
-    return data_[ind];
+__attribute__((always_inline)) T& Vector<T>::operator[](const size_t ind) {
+    return data_[ind - 1];
 }
 
 template<typename T>
-const T& Vector<T>::operator[](size_t ind) const {
-    ind--;
-    return data_[ind];
+__attribute__((always_inline)) const T& Vector<T>::operator[](const size_t ind) const {
+    return data_[ind - 1];
 }
 
 template<typename T>
 T& Vector<T>::at(size_t ind) {
-    ind--;
-    return data_.at(ind);
+    return data_.at(ind - 1);
 }
 
 template<typename T>
 const T& Vector<T>::at(size_t ind) const {
-    ind--;
-    return data_.at(ind);
+    return data_.at(ind - 1);
 }
 
 
