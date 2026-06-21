@@ -2,6 +2,8 @@
 // Created by Yerdaulet Mussabek on 15.06.2026.
 //
 
+#pragma GCC optimize("O3")
+
 #include "../include/GaussianSolver.h"
 
 #include "../include/Matrix.h"
@@ -40,7 +42,7 @@ Vector<T> GaussianSolver<T>::solve(const Matrix<T>& A, const Vector<T>& b) {
     auto b_iter = b.data().begin();
 
     for (size_t i = 0; i < Ab.n() * Ab.m(); i++) {
-        if ((i + 1) % Ab.m() == 0) {
+        if ((i + 1) % Ab.m() == 0) [[unlikely]] {
             *Ab_iter = *b_iter;
             b_iter++;
         } 
