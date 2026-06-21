@@ -36,6 +36,7 @@ public:
 
     Vector<T> operator*(const Vector<T>& v) const;
 
+    std::vector<T> &data() {return data_;}
     const std::vector<T> &data() const { return data_; }
     const T* data_ptr() const { return data_.data(); }
 
