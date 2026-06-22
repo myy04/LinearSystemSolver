@@ -57,12 +57,12 @@ template<typename T>
 size_t Matrix<T>::m() const {return m_;}
 
 template<typename T>
-__attribute__((always_inline)) T& Matrix<T>::operator[](const size_t i, const size_t j) {
+__attribute__((always_inline)) inline T& Matrix<T>::operator[](const size_t i, const size_t j) {
     return data_[row_order_[i - 1] * this->m() + j - 1];
 }
 
 template<typename T>
-__attribute__((always_inline)) const T& Matrix<T>::operator[](const size_t i, const size_t j) const {
+__attribute__((always_inline)) inline const T& Matrix<T>::operator[](const size_t i, const size_t j) const {
     return data_[row_order_[i - 1] * this->m() + j - 1];
 }
 
