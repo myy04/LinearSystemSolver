@@ -16,19 +16,18 @@ template class GaussianSolver<Scalar_t>;
 template class GaussianSolver<float>;
 template class GaussianSolver<int>;
 
-namespace {
-    template<typename T>
-    size_t find_partial_pivot(const Matrix<T>& A, size_t row_idx) {
-        T max_abs_val{A[row_idx, row_idx]};
-        size_t pivot = row_idx;
-        for (size_t i = row_idx + 1; i <= A.n(); i++) {
-            if (std::abs(A[i, row_idx]) > max_abs_val) {
-                max_abs_val = abs(A[i, row_idx]);
-                pivot = i;
-            }
+
+template<typename T>
+__attribute__((always_inline)) inline size_t find_partial_pivot(const Matrix<T>& A, const size_t row_idx) {
+    T max_abs_val{A[row_idx, row_idx]};
+    size_t pivot = row_idx;
+    for (size_t i = row_idx + 1; i <= A.n(); i++) {
+        if (std::abs(A[i, row_idx]) > max_abs_val) {
+            max_abs_val = abs(A[i, row_idx]);
+            pivot = i;
         }
-        return pivot;
     }
+    return pivot;
 }
 
 template<typename T>
@@ -61,7 +60,7 @@ Vector<T> GaussianSolver<T>::solve(const Matrix<T>& A, const Vector<T>& b) {
 
         for (size_t i2 = i + 1; i2 <= Ab.n(); i2++) {
             const T k = Ab[i2, i] / Ab[i, i];
-            for (size_t j = 1; j <= Ab.m(); j++) {
+            for (size_t j = i; j <= Ab.m(); j++) {
                 Ab[i2, j] -= Ab[i, j] * k;
             }
         }
